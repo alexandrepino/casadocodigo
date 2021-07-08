@@ -1,6 +1,7 @@
 package br.com.casadocodigo.loja.beans;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -74,6 +75,15 @@ public class AdminLivrosBean {
     	this.livro = new Livro();
         
     }
+	
+	public List <Autor> getAutores(){
+		
+		return Arrays.asList(new Autor(1,"Paulo"));
+		
+		
+		
+		
+	}
 
 	
     

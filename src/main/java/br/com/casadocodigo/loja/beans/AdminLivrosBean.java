@@ -13,7 +13,6 @@ import br.com.casadocodigo.loja.daos.LivroDao;
 import br.com.casadocodigo.loja.models.Autor;
 import br.com.casadocodigo.loja.models.Livro;
 
-
 @Named
 @RequestScoped
 public class AdminLivrosBean {
@@ -25,8 +24,42 @@ public class AdminLivrosBean {
 	
 	@Inject
 	private LivroDao dao;
+	
 	@Inject
 	private AutorDao autorDao;
+	
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
+	}
+
+	public List<Integer> getAutoresId() {
+		return autoresId;
+	}
+
+	public void setAutoresId(List<Integer> autoresId) {
+		this.autoresId = autoresId;
+	}
+
+	public LivroDao getDao() {
+		return dao;
+	}
+
+	public void setDao(LivroDao dao) {
+		this.dao = dao;
+	}
+
+	public AutorDao getAutorDao() {
+		return autorDao;
+	}
+
+	public void setAutorDao(AutorDao autorDao) {
+		this.autorDao = autorDao;
+	}
+
 
 	
 	@Transactional
@@ -42,19 +75,7 @@ public class AdminLivrosBean {
         
     }
 
-	public Livro getLivro() {
-		return livro;
-	}
-
-	public void setLivro(Livro livro) {
-		this.livro = livro;
-	}
 	
-	public List<Autor>getAutores(){
-		return autorDao.listar();
-		
-		
-	}
     
     
 

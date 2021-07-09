@@ -15,7 +15,7 @@ public class AutorDao {
 	
 	public List<Autor>listar() {
 
-		return manager.createQuery("select a from Autor a", Autor.class)
+		return manager.createQuery("SELECT a from Autor a ", Autor.class)
 				.getResultList();
 
 	}

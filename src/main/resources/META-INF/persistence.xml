@@ -8,6 +8,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/casadocodigoDS</jta-data-source>
 		
+		<class> br.com.casadocodigo.loja.models.Autor</class>
 		
 
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>

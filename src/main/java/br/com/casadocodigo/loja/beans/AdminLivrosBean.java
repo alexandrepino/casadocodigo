@@ -64,7 +64,7 @@ public class AdminLivrosBean {
 
 	
 	@Transactional
-    public void salvar() {
+    public String salvar() {
         for (Integer autorId : autoresId) {
         	livro.getAutores().add(new Autor(autorId));
 			
@@ -72,13 +72,13 @@ public class AdminLivrosBean {
 		dao.salvar(livro);
     	System.out.println("Livro salvo com Sucesso!" + this.livro);
     	
-    	this.livro = new Livro();
+    	return "/livros/lista";
         
     }
 	
 	public List <Autor> getAutores(){
 		
-		return Arrays.asList(new Autor(1,"Paulo"));
+		return Arrays.asList(new Autor(1,"Paulo"), new Autor(2,"Guilherme"));
 		
 		
 		

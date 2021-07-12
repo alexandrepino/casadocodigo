@@ -1,7 +1,6 @@
 package br.com.casadocodigo.loja.beans;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,10 +17,9 @@ import br.com.casadocodigo.loja.models.Livro;
 @RequestScoped
 public class AdminLivrosBean {
 	
-	
 	private Livro livro = new Livro();
 	
-	private List <Integer> autoresId = new ArrayList<Integer>();
+	private List <Autor> autores = new ArrayList<Autor>();
 	
 	@Inject
 	private LivroDao dao;
@@ -36,13 +34,13 @@ public class AdminLivrosBean {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-
-	public List<Integer> getAutoresId() {
-		return autoresId;
+	
+	public List<Autor> getAutores() {
+		return autorDao.listar();
 	}
 
-	public void setAutoresId(List<Integer> autoresId) {
-		this.autoresId = autoresId;
+	public void setAutores(List<Autor> autores) {
+		this.autores = autores;
 	}
 
 	public LivroDao getDao() {
@@ -60,33 +58,15 @@ public class AdminLivrosBean {
 	public void setAutorDao(AutorDao autorDao) {
 		this.autorDao = autorDao;
 	}
-
-
 	
 	@Transactional
     public String salvar() {
-        for (Integer autorId : autoresId) {
-        	livro.getAutores().add(new Autor(autorId));
-			
+        for (Autor autor : autores) {
+        	livro.getAutores().add(autor);
 		}
 		dao.salvar(livro);
     	System.out.println("Livro salvo com Sucesso!" + this.livro);
-    	
-    	return "/livros/lista";
-        
+    	return "/livros/lista?faces-redirect=true";
     }
-	
-	public List <Autor> getAutores(){
-		
-		return Arrays.asList(new Autor(1,"Paulo"), new Autor(2,"Guilherme"));
-		
-		
-		
-		
-	}
-
-	
-    
-    
 
 }

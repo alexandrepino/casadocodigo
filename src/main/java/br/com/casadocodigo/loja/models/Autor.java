@@ -5,34 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
 public class Autor {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id 
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String nome;
-	
-	
-
-	
-	public Autor() {
-		
-	}
-	
-	
-
-	public Autor(Integer id, String nome) {
-		
-		this.id = id;
-		this.nome = nome;
-	}
-
-
-
-	public Autor(Integer id) {
-       this.id = id;
-       
-	}
 
 	public Integer getId() {
 		return id;

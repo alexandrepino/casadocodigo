@@ -19,13 +19,23 @@ public class AdminLivrosBean {
 	
 	private Livro livro = new Livro();
 	
-	private List <Autor> autores = new ArrayList<Autor>();
+	private List<Integer> autoresId = new ArrayList<>();
 	
 	@Inject
 	private LivroDao dao;
 	
 	@Inject
 	private AutorDao autorDao;
+	
+	@Transactional
+    public String salvar() {
+        for (Integer autorId : autoresId) {
+        	livro.getAutores().add(new Autor(autorId));
+		}
+		dao.salvar(livro);
+    	System.out.println("Livro salvo com Sucesso!" + this.livro);
+    	return "/livros/lista?faces-redirect=true";
+    }
 	
 	public Livro getLivro() {
 		return livro;
@@ -39,8 +49,8 @@ public class AdminLivrosBean {
 		return autorDao.listar();
 	}
 
-	public void setAutores(List<Autor> autores) {
-		this.autores = autores;
+	public void setAutores(List<Integer> autoresId) {
+		this.autoresId = autoresId;
 	}
 
 	public LivroDao getDao() {
@@ -59,14 +69,6 @@ public class AdminLivrosBean {
 		this.autorDao = autorDao;
 	}
 	
-	@Transactional
-    public String salvar() {
-        for (Autor autor : autores) {
-        	livro.getAutores().add(autor);
-		}
-		dao.salvar(livro);
-    	System.out.println("Livro salvo com Sucesso!" + this.livro);
-    	return "/livros/lista?faces-redirect=true";
-    }
+
 
 }

@@ -9,9 +9,17 @@ import javax.persistence.Id;
 public class Autor {
 
 	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	public Autor() {
+		
+	}
+
+	public Autor(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getId() {
 		return id;

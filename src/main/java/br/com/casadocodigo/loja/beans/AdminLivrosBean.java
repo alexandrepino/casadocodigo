@@ -35,7 +35,7 @@ public class AdminLivrosBean {
         	livro.getAutores().add(new Autor(autorId));
 		}
 		dao.salvar(livro);
-    	System.out.println("Livro salvo com Sucesso!" + livro);
+    	System.out.println("Livro salvo com Sucesso!!!" + livro);
     	this.livro = new Livro();
     	this.autoresId = new ArrayList<>();
         return "/livros/lista?faces-redirect=true";

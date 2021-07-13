@@ -18,32 +18,41 @@ import br.com.casadocodigo.loja.models.Livro;
 
 @Named
 @RequestScoped
-@ManagedBean(value="adminLivrosBean")
+@ManagedBean(value = "adminLivrosBean")
 public class AdminLivrosBean {
-	
+
 	private Livro livro = new Livro();
-	
+
 	@Inject
 	private LivroDao dao;
 	
+	
+
 	@Inject
 	private AutorDao autorDao;
+	
+	@Inject
+	private FacesContext cont;
 
 	private List<Integer> autoresId = new ArrayList<>();
-	
+
+	public AdminLivrosBean() {
+
+		cont = FacesContext.getCurrentInstance();
+	}
+
 	@Transactional
-    public String salvar() {
-        for (Integer autorId : autoresId) {
-        	livro.getAutores().add(new Autor(autorId));
+	public String salvar() {
+		for (Integer autorId : autoresId) {
+			livro.getAutores().add(new Autor(autorId));
 		}
 		dao.salvar(livro);
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Livro Cadastrado com Sucesso!"));
-		
-    	
-        return "/livros/lista?faces-redirect=true";
-    }
-	
+		cont.getExternalContext().getFlash().setKeepMessages(true);
+		cont.addMessage(null, new FacesMessage("Livro Cadastrado com Sucesso!"));
+
+		return "/livros/lista?faces-redirect=true";
+	}
+
 	public Livro getLivro() {
 		return livro;
 	}
@@ -51,12 +60,10 @@ public class AdminLivrosBean {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-	
+
 	public List<Autor> getAutores() {
 		return autorDao.listar();
 	}
-	
-	
 
 	public List<Integer> getAutoresId() {
 		return autoresId;
@@ -81,7 +88,5 @@ public class AdminLivrosBean {
 	public void setAutorDao(AutorDao autorDao) {
 		this.autorDao = autorDao;
 	}
-	
-
 
 }

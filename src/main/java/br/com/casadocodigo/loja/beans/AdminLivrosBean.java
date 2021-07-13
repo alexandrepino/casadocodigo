@@ -3,6 +3,7 @@ package br.com.casadocodigo.loja.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,17 +16,18 @@ import br.com.casadocodigo.loja.models.Livro;
 
 @Named
 @RequestScoped
+@ManagedBean(value="adminLivrosBean")
 public class AdminLivrosBean {
 	
 	private Livro livro = new Livro();
-	
-	private List<Integer> autoresId = new ArrayList<>();
 	
 	@Inject
 	private LivroDao dao;
 	
 	@Inject
 	private AutorDao autorDao;
+
+	private List<Integer> autoresId = new ArrayList<>();
 	
 	@Transactional
     public String salvar() {
@@ -33,8 +35,10 @@ public class AdminLivrosBean {
         	livro.getAutores().add(new Autor(autorId));
 		}
 		dao.salvar(livro);
-    	System.out.println("Livro salvo com Sucesso!" + this.livro);
-    	return "/livros/lista?faces-redirect=true";
+    	System.out.println("Livro salvo com Sucesso!" + livro);
+    	this.livro = new Livro();
+    	this.autoresId = new ArrayList<>();
+        return "/livros/lista?faces-redirect=true";
     }
 	
 	public Livro getLivro() {
@@ -48,8 +52,14 @@ public class AdminLivrosBean {
 	public List<Autor> getAutores() {
 		return autorDao.listar();
 	}
+	
+	
 
-	public void setAutores(List<Integer> autoresId) {
+	public List<Integer> getAutoresId() {
+		return autoresId;
+	}
+
+	public void setAutoresId(List<Integer> autoresId) {
 		this.autoresId = autoresId;
 	}
 

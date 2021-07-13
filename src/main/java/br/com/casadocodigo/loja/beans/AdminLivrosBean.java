@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -35,9 +37,10 @@ public class AdminLivrosBean {
         	livro.getAutores().add(new Autor(autorId));
 		}
 		dao.salvar(livro);
-    	System.out.println("Livro salvo com Sucesso!!!" + livro);
-    	this.livro = new Livro();
-    	this.autoresId = new ArrayList<>();
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Livro Cadastrado com Sucesso!"));
+		
+    	
         return "/livros/lista?faces-redirect=true";
     }
 	

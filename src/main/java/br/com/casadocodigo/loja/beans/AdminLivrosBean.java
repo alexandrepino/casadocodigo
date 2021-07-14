@@ -48,7 +48,7 @@ public class AdminLivrosBean {
 		}
 		dao.salvar(livro);
 		cont.getExternalContext().getFlash().setKeepMessages(true);
-		cont.addMessage(null, new FacesMessage("Livro Cadastrado com Sucesso!"));
+		cont.addMessage(null, new FacesMessage("Livro Cadastrado com Sucesso!!!!"));
 
 		return "/livros/lista?faces-redirect=true";
 	}
